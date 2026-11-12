@@ -1,0 +1,16 @@
+
+{
+  "name": "math-final-master",
+  "version": "1.0.0",
+  "description": "수학 기말고사 개념 정리 및 2000문항 학습 사이트",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
