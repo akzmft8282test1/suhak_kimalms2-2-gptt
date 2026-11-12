@@ -141,18 +141,25 @@ function makeQuestion(id, chapter, type, prompt, answer, explanation, choices = 
   };
 }
 
+
 function mcQuestion(id, chapter, prompt, answer, explanation, distractors) {
-  const unique = [...new Set([String(answer), ...distractors.map(String)])]
-    .slice(0, 5);
+  const unique = [];
+  for (const value of [String(answer), ...distractors.map(String)]) {
+    if (!unique.includes(value)) unique.push(value);
+  }
 
-  while (unique.length < 5) unique.push(String(Number(unique[unique.length - 1]) + 3));
+  let filler = 1;
+  while (unique.length < 5) {
+    const candidate = `보기 ${filler++}`;
+    if (!unique.includes(candidate)) unique.push(candidate);
+  }
 
-  // 정답 위치를 문제마다 바꾼다.
+  const choices = unique.slice(0, 5);
   const shift = id % 5;
-  const choices = unique.slice(shift).concat(unique.slice(0, shift));
+  const shuffled = choices.slice(shift).concat(choices.slice(0, shift));
 
   return makeQuestion(
-    id, chapter, "mc", prompt, answer, explanation, choices
+    id, chapter, "mc", prompt, String(answer), explanation, shuffled
   );
 }
 
