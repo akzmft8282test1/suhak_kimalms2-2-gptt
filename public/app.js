@@ -289,6 +289,17 @@ function generateQuestions() {
       `피타고라스 정리에 의해 c²=${a}²+${b}²=${sum}이다.`
     ));
   }
+  
+  const mc = questions
+    .filter(q => q.type === "mc")
+    .slice(0, 1875);
+
+  const short = questions
+    .filter(q => q.type === "short")
+    .slice(0, 125);
+
+  return [...mc, ...short];
+
 
   return questions;
 }
